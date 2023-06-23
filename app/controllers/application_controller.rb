@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
     case current_user.role
     when 'admin'
       root_path 
-    # else
-    #   customer_path
+    else
+      customer_dashboard_path
     end
   end
 

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
     get '/forgot_username', to: 'users/sessions#forgot_username', as: :forgot_username
     post '/forgot_username', to: 'users/sessions#send_username', as: :send_username
   end  
+  get '/customer', to: 'dashboard#index', as: :customer_dashboard
 end
