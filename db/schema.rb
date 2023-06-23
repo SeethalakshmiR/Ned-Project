@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_19_124436) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
   create_table "j33_action_log_configs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "type_title", null: false
     t.string "type_alias", null: false
@@ -1920,28 +1920,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_124436) do
   end
 
   create_table "j33_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", limit: 400, null: false
-    t.string "username", limit: 150, null: false
+    t.string "username", limit: 190, null: false
     t.string "email", limit: 100, null: false
-    t.string "password", limit: 100, null: false
-    t.boolean "block", default: false, null: false
-    t.boolean "sendEmail", default: false
-    t.datetime "registerDate", null: false
-    t.datetime "lastvisitDate", null: false
-    t.string "activation", limit: 100, null: false
-    t.text "params", size: :medium, null: false
-    t.datetime "lastResetTime", null: false, comment: "Date of last password reset"
-    t.integer "resetCount", default: 0, null: false, comment: "Count of password resets since lastResetTime"
-    t.string "otpKey", limit: 1000, null: false, comment: "Two factor authentication encrypted keys"
-    t.string "otep", limit: 1000, null: false, comment: "One time emergency passwords"
-    t.boolean "requireReset", default: false, null: false, comment: "Require user to reset password on next login"
-    t.string "authProvider", limit: 100, null: false, comment: "Name of used authentication plugin"
+    t.string "encrypted_password", limit: 100, null: false
+    t.string "secret_key"
+    t.integer "role", default: 0, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["block"], name: "idx_block"
     t.index ["email"], name: "email"
-    t.index ["name"], name: "idx_name", length: 100
     t.index ["username"], name: "idx_username", unique: true
   end
 
