@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title> NedProject</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<%= csrf_meta_tags %>
-	<%= csp_meta_tag %>
-	<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-	<%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> NedProject</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body class="bg-silver-300">
-	<div class="content">
-		<div class="brand">
-			<a class="link" href="index.html">AdminCAST</a>
-		</div>
-		<p class="notice"><%= notice %></p> 
-		<p class="alert"><%= alert %></p>
-		<%= yield %>
-	</div>
+  <div class="content">
+    <div class="brand">
+      <a class="link" href="index.html">AdminCAST</a>
+    </div>
+    <p class="notice"><%= notice %></p> 
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </div>
 </body>
 </html>
 
