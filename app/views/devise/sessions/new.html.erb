@@ -1,41 +1,36 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-	<h2 class="login-title">Log in</h2>
-	<div class="form-group">
-			<div class="input-group-icon right">
-					<div class="input-icon"><i class="fa fa-envelope"></i></div>
-					<%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", placeholder: "Username" %>
-			</div>
+<h2 class="login-title">Log in</h2>
+<div class="form-group">
+	<div class="input-group-icon right">
+		<div class="input-icon"><i class="fa fa-envelope"></i></div>
+			<%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", placeholder: "Username" %>
 	</div>
-	<div class="form-group">
-			<div class="input-group-icon right">
-					<div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-					<%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password" %>
-			</div>
-	</div>
-	<div class="form-group">
-			<div class="input-group-icon right">
-					<div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-					<%= f.text_field :secret_key, autocomplete: "secretkey", class: "form-control", placeholder: "secretkey (optional)" %>
-			</div>
-	</div>
-	<div class="form-group d-flex justify-content-between">
-			<div class="input-group-icon right">
-					<div class="input-icon"></div>
-					<%= f.select :role, User.roles.keys %>
-					</div>
-					<%= link_to 'Forgot Username?', forgot_username_path %>
-	</div>
-	<div class="form-group d-flex justify-content-between">
-			<label class="ui-checkbox ui-checkbox-info">
-					<input type="checkbox">
-					<span class="input-span"></span>Remember me</label>
-			<% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-			<%= link_to "Forgot Password?", new_password_path(resource_name) %>
-				<% end %>		
-	</div>
-
-	<div class="form-group">
-			<%= f.submit "Log in", class: "btn btn-info btn-block"  %>
-	</div>
-	<% end %>
 </div>
+<div class="form-group">
+	<div class="input-group-icon right">
+		<div class="input-icon"><i class="fa fa-lock font-16"></i></div>
+			<%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password" %>
+	</div>
+</div>
+<div class="form-group">
+	<div class="input-group-icon right">
+		<div class="input-icon"><i class="fa fa-lock font-16"></i></div>
+			<%= f.text_field :secret_key, autocomplete: "secretkey", class: "form-control", placeholder: "secretkey (optional)" %>
+	</div>
+</div>
+<div class="form-group d-flex justify-content-between">
+	<div class="input-group-icon right"></div>
+		<%= link_to 'Forgot Username?', forgot_username_path %>
+</div>
+<div class="form-group d-flex justify-content-between">
+	<label class="ui-checkbox ui-checkbox-info">
+		<input type="checkbox">
+		<span class="input-span"></span>Remember me</label>
+		<% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+			<%= link_to "Forgot Password?", new_password_path(resource_name) %>
+		<% end %>		
+</div>
+<div class="form-group">
+	<%= f.submit "Log in", class: "btn btn-info btn-block"  %>
+</div>
+<% end %>
