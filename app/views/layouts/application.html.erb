@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>NedProject</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<%= csrf_meta_tags %>
-	<%= csp_meta_tag %>
+  <title>NedProject</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-	<%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
-	<%= yield %>
-	<%= link_to "Log Out", logout_path %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+  <%= link_to "Log Out", logout_path %>
 </body>
 </html>
