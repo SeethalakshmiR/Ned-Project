@@ -4,5 +4,10 @@ class DashboardController < ApplicationController
   end
   
   def index
+    @user_details = current_user
+  end
+
+  def create_theme
+    
   end
 end

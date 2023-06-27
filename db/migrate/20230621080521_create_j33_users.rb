@@ -11,7 +11,7 @@ class CreateJ33Users < ActiveRecord::Migration[7.0]
       t.integer :role, null: false, default: 0
       # t.boolean :block, null: false, default: 0, index: {name: 'idx_block'}
       # t.boolean :sendEmail, default: 0
-      # t.datetime :registerDate, null: false
+      t.datetime :registerDate, null: false
       # t.datetime :lastvisitDate, null: false
       # t.string :activation, null: false, default: nil, limit: 100
       # t.text :params, null: false, limit: 16777215 

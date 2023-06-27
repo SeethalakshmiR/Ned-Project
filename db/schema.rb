@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
-  create_table "j33_action_log_configs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_action_log_configs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "type_title", null: false
     t.string "type_alias", null: false
     t.string "id_holder"
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_action_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_action_logs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "message_language_key", null: false
     t.text "message", null: false
     t.datetime "log_date", null: false
@@ -40,16 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "idx_user_id"
   end
 
-  create_table "j33_action_logs_extensions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_action_logs_extensions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "extension", null: false
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_action_logs_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_action_logs_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "notify", limit: 1, null: false, unsigned: true
+    t.boolean "notify", null: false, unsigned: true
     t.text "extensions", null: false
     t.string "token", limit: 50
     t.datetime "created_at", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "index_j33_action_logs_users_on_user_id", unique: true
   end
 
-  create_table "j33_ak_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_ak_profiles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "description", null: false
     t.text "configuration", size: :long
     t.text "filters", size: :long
@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_ak_stats", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_ak_stats", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "description", null: false
     t.text "comment", size: :long
     t.timestamp "backupstart"
@@ -95,9 +95,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["status", "origin"], name: "idx_stale"
   end
 
-  create_table "j33_ak_storages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_ak_storages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tag", null: false
-    t.timestamp "lastupdate", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "lastupdate", default: -> { "current_timestamp()" }, null: false
     t.text "data", size: :long
     t.string "token", limit: 50
     t.datetime "created_at", null: false
@@ -105,7 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["tag"], name: "idx_tag", unique: true, length: 100
   end
 
-  create_table "j33_akeeba_commons", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_akeeba_commons", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "key", limit: 190, null: false
     t.text "value", size: :long, null: false
     t.string "token", limit: 50
@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["key"], name: "idx_key", unique: true
   end
 
-  create_table "j33_assets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_assets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "parent_id", default: 0, null: false, comment: "Nested set parent."
     t.integer "lft", default: 0, null: false, comment: "Nested set lft."
     t.integer "rgt", default: 0, null: false, comment: "Nested set rgt."
@@ -130,7 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["parent_id"], name: "idx_parent_id"
   end
 
-  create_table "j33_associations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_associations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "context", limit: 50, null: false, comment: "The context of the associated item."
     t.string "key", limit: 32, null: false, comment: "The key for the association computed from an md5 on associated ids."
     t.string "token", limit: 50
@@ -140,7 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["key"], name: "idx_key"
   end
 
-  create_table "j33_banner_clients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_banner_clients", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "contact", null: false
     t.string "email", null: false
@@ -161,7 +161,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["own_prefix"], name: "idx_own_prefix"
   end
 
-  create_table "j33_banner_tracks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_banner_tracks", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.datetime "track_date", null: false
     t.integer "track_type", null: false, unsigned: true
     t.bigint "banner_id", null: false
@@ -175,7 +175,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["track_type"], name: "idx_track_type"
   end
 
-  create_table "j33_banners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_banners", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "cid", default: 0, null: false
     t.integer "type", default: 0, null: false
     t.string "name", null: false
@@ -219,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["state"], name: "idx_state"
   end
 
-  create_table "j33_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false, comment: "FK to the jos_assets table."
     t.integer "parent_id", default: 0, null: false, unsigned: true
     t.integer "lft", default: 0, null: false
@@ -259,7 +259,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["path"], name: "idx_path", length: 100
   end
 
-  create_table "j33_cjlib_configs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_cjlib_configs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "config_name", null: false
     t.text "config_value", null: false
     t.string "token", limit: 50
@@ -268,7 +268,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["config_name"], name: "index_j33_cjlib_configs_on_config_name", unique: true
   end
 
-  create_table "j33_contact_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_contact_details", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "alias", limit: 400, null: false
     t.string "con_position"
@@ -305,7 +305,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.text "metakey", size: :medium, null: false
     t.text "metadesc", size: :medium, null: false
     t.text "metadata", size: :medium, null: false
-    t.integer "featured", limit: 1, default: 0, null: false, comment: "Set if article is featured.", unsigned: true
+    t.boolean "featured", default: false, null: false, comment: "Set if article is featured.", unsigned: true
     t.string "xreference", limit: 50, null: false, comment: "A reference to enable linkages to external data sets."
     t.datetime "publish_up", null: false
     t.datetime "publish_down", null: false
@@ -325,7 +325,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["xreference"], name: "idx_xreference"
   end
 
-  create_table "j33_content_frontpages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_content_frontpages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "content_id", default: 0, null: false
     t.integer "ordering", default: 0, null: false
     t.string "token", limit: 50
@@ -334,7 +334,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["content_id"], name: "index_j33_content_frontpages_on_content_id", unique: true
   end
 
-  create_table "j33_content_ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_content_ratings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "content_id", default: 0, null: false
     t.integer "rating_sum", default: 0, null: false, unsigned: true
     t.integer "rating_count", default: 0, null: false, unsigned: true
@@ -345,11 +345,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["content_id"], name: "idx_PRIMARY"
   end
 
-  create_table "j33_content_statistics", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_content_statistics", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "component", null: false
     t.integer "type", null: false
     t.integer "value", null: false
-    t.timestamp "date_event", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "date_event", default: -> { "current_timestamp()" }, null: false
     t.string "ip", limit: 31, null: false
     t.string "valuestring", null: false
     t.integer "reference_id", null: false
@@ -369,7 +369,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "user_id"
   end
 
-  create_table "j33_content_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_content_types", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "type_id", null: false, unsigned: true
     t.string "type_title", null: false
     t.string "type_alias", limit: 400, null: false
@@ -385,12 +385,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["type_id"], name: "index_j33_content_types_on_type_id", unique: true
   end
 
-  create_table "j33_contentitem_tag_maps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_contentitem_tag_maps", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "type_alias", null: false
     t.integer "core_content_id", null: false, comment: "PK from the core content table", unsigned: true
     t.integer "content_item_id", null: false, comment: "PK from the content type table"
     t.bigint "tag_id", null: false, comment: "PK from the tag table"
-    t.timestamp "tag_date", default: -> { "CURRENT_TIMESTAMP" }, null: false, comment: "Date of most recent save for this tag-item"
+    t.timestamp "tag_date", default: -> { "current_timestamp()" }, null: false, comment: "Date of most recent save for this tag-item"
     t.bigint "type_id", null: false, comment: "PK from the content_type table"
     t.string "token", limit: 50
     t.datetime "created_at", null: false
@@ -403,7 +403,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["type_id"], name: "index_j33_contentitem_tag_maps_on_type_id"
   end
 
-  create_table "j33_contents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_contents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false, comment: "FK to the jos_assets table."
     t.string "title", null: false
     t.string "alias", limit: 400, null: false
@@ -430,7 +430,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.integer "access", default: 0, null: false, unsigned: true
     t.integer "hits", default: 0, null: false, unsigned: true
     t.text "metadata", size: :medium, null: false
-    t.integer "featured", limit: 1, default: 0, null: false, comment: "Set if article is featured.", unsigned: true
+    t.boolean "featured", default: false, null: false, comment: "Set if article is featured.", unsigned: true
     t.string "language", limit: 7, null: false, comment: "The language code for the article."
     t.string "xreference", limit: 50, null: false
     t.string "note", null: false
@@ -449,7 +449,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["xreference"], name: "idx_xreference"
   end
 
-  create_table "j33_core_log_searches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_core_log_searches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "search_term", limit: 128, null: false
     t.integer "hits", default: 0, null: false, unsigned: true
     t.string "token", limit: 50
@@ -457,7 +457,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_corejoomla_assets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_corejoomla_assets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", limit: 64, null: false
     t.string "version", limit: 32, null: false
     t.date "released", null: false
@@ -466,7 +466,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_corejoomla_countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_corejoomla_countries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "country_code", limit: 3, null: false
     t.string "country_name", limit: 64, null: false
     t.string "language", limit: 6, default: "*", null: false
@@ -476,8 +476,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["country_code", "language"], name: "idx_corejoomla_countries_uniq", unique: true
   end
 
-  create_table "j33_corejoomla_messagequeues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "status", limit: 1, default: 0, null: false, unsigned: true
+  create_table "j33_corejoomla_messagequeues", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.boolean "status", default: false, null: false, unsigned: true
     t.string "to_addr", limit: 128, null: false
     t.string "cc_addr", limit: 128
     t.string "bcc_addr", limit: 128
@@ -492,7 +492,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["message_id"], name: "index_j33_corejoomla_messagequeues_on_message_id"
   end
 
-  create_table "j33_corejoomla_messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_corejoomla_messages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", null: false
     t.string "asset_name", limit: 64, null: false
     t.string "subject", null: false
@@ -505,7 +505,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["asset_id"], name: "index_j33_corejoomla_messages_on_asset_id"
   end
 
-  create_table "j33_corejoomla_rating_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_corejoomla_rating_details", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", null: false
     t.integer "item_id", null: false, unsigned: true
     t.integer "action_id", default: 0, null: false, unsigned: true
@@ -518,7 +518,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["asset_id"], name: "index_j33_corejoomla_rating_details_on_asset_id"
   end
 
-  create_table "j33_corejoomla_ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_corejoomla_ratings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "item_id", null: false, unsigned: true
     t.bigint "asset_id", null: false
     t.integer "total_ratings", default: 0, null: false, unsigned: true
@@ -531,13 +531,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["item_id", "asset_id"], name: "index_j33_corejoomla_ratings_on_item_id_and_asset_id", unique: true
   end
 
-  create_table "j33_example_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_example_items", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_extensions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_extensions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "extension_id", null: false
     t.integer "package_id", default: 0, null: false, comment: "Parent package ID for extensions installed as a package."
     t.string "name", limit: 100, null: false
@@ -565,7 +565,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["type", "element", "folder", "client_id"], name: "extension"
   end
 
-  create_table "j33_fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fields", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false
     t.string "context", null: false
     t.integer "group_id", default: 0, null: false, unsigned: true
@@ -601,7 +601,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["state"], name: "idx_state"
   end
 
-  create_table "j33_fields_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fields_categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "field_id", default: 0, null: false
     t.bigint "category_id", default: 0, null: false
     t.string "token", limit: 50
@@ -612,7 +612,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["field_id"], name: "index_j33_fields_categories_on_field_id"
   end
 
-  create_table "j33_fields_groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fields_groups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false
     t.string "context", null: false
     t.string "title", null: false
@@ -640,7 +640,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["state"], name: "idx_state"
   end
 
-  create_table "j33_fields_values", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fields_values", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "field_id", null: false
     t.string "item_id", null: false, comment: "Allow references to items which have strings as ids, eg. none db systems."
     t.text "value"
@@ -651,7 +651,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["item_id"], name: "idx_item_id", length: 191
   end
 
-  create_table "j33_fieldsattach_categories_values", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fieldsattach_categories_values", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "cat_id", null: false
     t.bigint "fields_id", null: false
     t.text "value", null: false
@@ -662,7 +662,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["fields_id"], name: "index_j33_fieldsattach_categories_values_on_fields_id"
   end
 
-  create_table "j33_fieldsattach_groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fieldsattach_groups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.string "note", limit: 150
     t.integer "access"
@@ -681,7 +681,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_fieldsattach_images", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fieldsattach_images", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "articleid", null: false
     t.bigint "fieldsattach_id", null: false
     t.bigint "cat_id"
@@ -699,7 +699,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["fieldsattach_id"], name: "index_j33_fieldsattach_images_on_fieldsattach_id"
   end
 
-  create_table "j33_fieldsattach_values", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fieldsattach_values", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "articleid", null: false
     t.bigint "fields_id", null: false
     t.text "value", size: :medium, null: false
@@ -709,7 +709,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["fields_id"], name: "index_j33_fieldsattach_values_on_fields_id"
   end
 
-  create_table "j33_fieldsattaches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_fieldsattaches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", limit: 200, null: false
     t.text "extras", null: false
     t.integer "showtitle", limit: 1, null: false
@@ -729,7 +729,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_finder_filters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_filters", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "filter_id", null: false, unsigned: true
     t.string "title", null: false
     t.string "alias", null: false
@@ -750,7 +750,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["filter_id"], name: "index_j33_finder_filters_on_filter_id", unique: true
   end
 
-  create_table "j33_finder_links", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "link_id", null: false, unsigned: true
     t.string "url", null: false
     t.string "route", null: false
@@ -782,7 +782,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["url"], name: "idx_url", length: 75
   end
 
-  create_table "j33_finder_links_terms0s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms0s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -796,7 +796,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms0s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms1s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms1s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -810,7 +810,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms1s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms2s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms2s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -824,7 +824,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms2s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms3s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms3s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -838,7 +838,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms3s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms4s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms4s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -852,7 +852,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms4s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms5s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms5s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -866,7 +866,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms5s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms6s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms6s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -880,7 +880,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms6s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms7s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms7s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -894,7 +894,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms7s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms8s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms8s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -908,7 +908,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms8s_on_term_id"
   end
 
-  create_table "j33_finder_links_terms9s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_terms9s", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -922,7 +922,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_terms9s_on_term_id"
   end
 
-  create_table "j33_finder_links_termsas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_termsas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -936,7 +936,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_termsas_on_term_id"
   end
 
-  create_table "j33_finder_links_termsbs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_termsbs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -950,7 +950,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_termsbs_on_term_id"
   end
 
-  create_table "j33_finder_links_termscs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_termscs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -964,7 +964,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_termscs_on_term_id"
   end
 
-  create_table "j33_finder_links_termsds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_termsds", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -978,7 +978,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_termsds_on_term_id"
   end
 
-  create_table "j33_finder_links_termses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_termses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -992,7 +992,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_termses_on_term_id"
   end
 
-  create_table "j33_finder_links_termsfs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_links_termsfs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "term_id", null: false
     t.float "weight", null: false, unsigned: true
@@ -1006,11 +1006,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_links_termsfs_on_term_id"
   end
 
-  create_table "j33_finder_taxonomies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_taxonomies", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "parent_id", default: 0, null: false, unsigned: true
     t.string "title", null: false
     t.integer "state", limit: 1, default: 1, null: false, unsigned: true
-    t.integer "access", limit: 1, default: 0, null: false, unsigned: true
+    t.boolean "access", default: false, null: false, unsigned: true
     t.integer "ordering", limit: 1, default: 0, null: false, unsigned: true
     t.string "token", limit: 50
     t.datetime "created_at", null: false
@@ -1022,7 +1022,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["state"], name: "state"
   end
 
-  create_table "j33_finder_taxonomy_maps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_taxonomy_maps", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.integer "node_id", null: false, unsigned: true
     t.string "token", limit: 50
@@ -1033,7 +1033,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["node_id"], name: "node_id"
   end
 
-  create_table "j33_finder_terms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_terms", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "term_id", null: false, unsigned: true
     t.string "term", limit: 75, null: false
     t.string "stem", limit: 75, null: false
@@ -1053,7 +1053,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "index_j33_finder_terms_on_term_id", unique: true
   end
 
-  create_table "j33_finder_terms_commons", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_terms_commons", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "term", limit: 75, null: false
     t.string "language", limit: 3, null: false
     t.string "token", limit: 50
@@ -1063,7 +1063,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term", "language"], name: "idx_word_lang"
   end
 
-  create_table "j33_finder_tokens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_tokens", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "term", limit: 75, null: false
     t.string "stem", limit: 75, null: false
     t.integer "common", limit: 1, default: 0, null: false, unsigned: true
@@ -1078,7 +1078,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term"], name: "idx_word"
   end
 
-  create_table "j33_finder_tokens_aggregates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_tokens_aggregates", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "term_id", null: false
     t.string "map_suffix", limit: 1, null: false
     t.string "term", limit: 75, null: false
@@ -1097,7 +1097,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["term_id"], name: "keyword_id"
   end
 
-  create_table "j33_finder_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_finder_types", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", limit: 100, null: false
     t.string "mime", limit: 100, null: false
     t.string "token", limit: 50
@@ -1106,7 +1106,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["title"], name: "title", unique: true
   end
 
-  create_table "j33_gad_dash_caches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_gad_dash_caches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "data", null: false
     t.integer "expire", null: false
@@ -1116,13 +1116,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["name"], name: "name", unique: true
   end
 
-  create_table "j33_gad_dashes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_gad_dashes", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_jbackend_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jbackend_keys", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "key", null: false
     t.bigint "user_id", default: 0, null: false, comment: "Existing user id"
     t.integer "daily_requests", default: 0, null: false, comment: "Max number of daily requests (0=Unlimited)"
@@ -1143,21 +1143,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "index_j33_jbackend_keys_on_user_id"
   end
 
-  create_table "j33_jcp_approvals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_approvals", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "item_id", null: false, unsigned: true
     t.integer "item_type", null: false, unsigned: true
     t.string "secret", limit: 128, null: false
-    t.integer "status", limit: 1, null: false, unsigned: true
+    t.boolean "status", null: false, unsigned: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["secret"], name: "idx_secret", unique: true
   end
 
-  create_table "j33_jcp_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.string "alias", null: false
-    t.integer "published", limit: 1, default: 0, null: false, unsigned: true
-    t.integer "locked", limit: 1, default: 0, null: false, unsigned: true
+    t.boolean "published", default: false, null: false, unsigned: true
+    t.boolean "locked", default: false, null: false, unsigned: true
     t.integer "parent_id", null: false, unsigned: true
     t.integer "num_polls", default: 0, null: false, unsigned: true
     t.integer "num_votes", default: 0, null: false, unsigned: true
@@ -1171,20 +1171,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_jcp_options", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_options", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "poll_id", null: false
     t.string "title", null: false
     t.string "type", limit: 10
     t.integer "votes", default: 0, null: false, unsigned: true
     t.integer "order", null: false, unsigned: true
-    t.integer "published", limit: 1, default: 1, null: false, unsigned: true
+    t.boolean "published", default: true, null: false, unsigned: true
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["poll_id"], name: "idx_jcp_options_pollid"
   end
 
-  create_table "j33_jcp_polls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_polls", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false
     t.string "title", null: false
     t.string "alias", null: false
@@ -1202,7 +1202,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "last_voted"
     t.integer "checked_out", default: 0, null: false, unsigned: true
     t.datetime "checked_out_time", null: false
-    t.integer "featured", limit: 1, default: 0, null: false, unsigned: true
+    t.boolean "featured", default: false, null: false, unsigned: true
     t.datetime "close_date"
     t.datetime "results_up", null: false
     t.string "ip_address", limit: 39
@@ -1240,7 +1240,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["published"], name: "idx_jcp_polls_published"
   end
 
-  create_table "j33_jcp_resources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_resources", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "type", null: false
     t.text "value", null: false
     t.bigint "poll_id", null: false
@@ -1252,7 +1252,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["poll_id"], name: "index_j33_jcp_resources_on_poll_id"
   end
 
-  create_table "j33_jcp_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "polls", default: 0, null: false, unsigned: true
     t.integer "votes", default: 0, null: false, unsigned: true
     t.datetime "last_poll", null: false
@@ -1262,7 +1262,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_jcp_votes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_jcp_votes", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "poll_id", null: false
     t.integer "voter_id", unsigned: true
     t.string "ip_address", limit: 39
@@ -1278,7 +1278,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["voter_id"], name: "idx_jcp_votes_voter_id"
   end
 
-  create_table "j33_joodb_samples", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_joodb_samples", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "myid", null: false
     t.string "title", limit: 100, null: false
     t.string "value", limit: 10
@@ -1288,7 +1288,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.text "description", null: false
     t.string "wikipedia", limit: 254
     t.string "category", null: false
-    t.timestamp "date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "date", default: -> { "current_timestamp()" }, null: false
     t.integer "state", limit: 1, default: 0, null: false, comment: "Table with joodb sample nosense data. Save to remove"
     t.string "token", limit: 50
     t.datetime "created_at", null: false
@@ -1298,11 +1298,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["title"], name: "title"
   end
 
-  create_table "j33_joodb_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_joodb_settings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", limit: 127, null: false
     t.text "value", null: false
     t.integer "jb_id"
-    t.timestamp "changed", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "changed", default: -> { "current_timestamp()" }, null: false
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1310,7 +1310,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["name"], name: "name"
   end
 
-  create_table "j33_joodbs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_joodbs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", limit: 125, null: false
     t.string "table", null: false
     t.text "tpl_list", null: false
@@ -1325,13 +1325,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.string "fstate"
     t.text "params"
     t.boolean "published", default: true, null: false
-    t.timestamp "created", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "created", default: -> { "current_timestamp()" }, null: false
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_languages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_languages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "lang_id", null: false, unsigned: true
     t.bigint "asset_id", default: 0, null: false
     t.string "lang_code", limit: 7, null: false
@@ -1357,7 +1357,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["sef"], name: "idx_sef", unique: true
   end
 
-  create_table "j33_menu_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_menu_types", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false
     t.string "menutype", limit: 24, null: false
     t.string "title", limit: 48, null: false
@@ -1370,7 +1370,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["menutype"], name: "idx_menutype"
   end
 
-  create_table "j33_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_menus", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "menutype", limit: 24, null: false, comment: "The type of menu this item belongs to. FK to #__menu_types.menutype"
     t.string "title", null: false, comment: "The display title of the menu item."
     t.string "alias", limit: 400, null: false, comment: "The SEF alias of the menu item."
@@ -1407,7 +1407,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["template_style_id"], name: "index_j33_menus_on_template_style_id"
   end
 
-  create_table "j33_messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_messages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "message_id", null: false, unsigned: true
     t.integer "user_id_from", default: 0, null: false, unsigned: true
     t.integer "user_id_to", default: 0, null: false, unsigned: true
@@ -1424,7 +1424,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id_to", "state"], name: "useridto_state"
   end
 
-  create_table "j33_messages_cfgs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_messages_cfgs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", default: 0, null: false
     t.string "cfg_name", limit: 100, null: false
     t.string "cfg_value", null: false
@@ -1435,7 +1435,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "index_j33_messages_cfgs_on_user_id"
   end
 
-  create_table "j33_mijosql_queries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_mijosql_queries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "query", null: false
     t.string "token", limit: 50
@@ -1443,7 +1443,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_modules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_modules", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "asset_id", default: 0, null: false, comment: "FK to the jos_assets table."
     t.string "title", limit: 100, null: false
     t.string "note", null: false
@@ -1457,7 +1457,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.integer "published", limit: 1, default: 0, null: false
     t.string "module", limit: 50
     t.integer "access", default: 0, null: false, unsigned: true
-    t.integer "showtitle", limit: 1, default: 1, null: false, unsigned: true
+    t.boolean "showtitle", default: true, null: false, unsigned: true
     t.text "params", size: :medium, null: false
     t.integer "client_id", limit: 1, default: 0, null: false
     t.string "language", limit: 7, null: false
@@ -1470,7 +1470,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["published", "access"], name: "published"
   end
 
-  create_table "j33_modules_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_modules_menus", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "module_id", default: 0, null: false
     t.bigint "menu_id", default: 0, null: false
     t.string "token", limit: 50
@@ -1481,7 +1481,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["module_id"], name: "index_j33_modules_menus_on_module_id"
   end
 
-  create_table "j33_newsfeeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_newsfeeds", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "cat_id", default: 0, null: false
     t.string "name", limit: 100, null: false
     t.string "alias", limit: 400, null: false
@@ -1523,7 +1523,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["xreference"], name: "idx_xreference"
   end
 
-  create_table "j33_overriders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_overriders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "constant", null: false
     t.text "string", size: :medium, null: false
     t.string "file", null: false
@@ -1532,7 +1532,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_piota_error_loggers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_piota_error_loggers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "ordering", null: false
     t.integer "state", limit: 1, null: false
     t.datetime "created_datetime", null: false
@@ -1564,7 +1564,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_postinstall_messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_postinstall_messages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "postinstall_message_id", null: false, unsigned: true
     t.bigint "extension_id", default: 700, null: false, comment: "FK to jos_extensions"
     t.string "title_key", null: false, comment: "Lang key for the title"
@@ -1586,7 +1586,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["postinstall_message_id"], name: "index_j33_postinstall_messages_on_postinstall_message_id", unique: true
   end
 
-  create_table "j33_privacy_consents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_privacy_consents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "state", default: 1, null: false
     t.datetime "created", null: false
@@ -1599,7 +1599,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "idx_user_id"
   end
 
-  create_table "j33_privacy_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_privacy_requests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", limit: 100, null: false
     t.datetime "requested_at", null: false
     t.integer "status", limit: 1, default: 0, null: false
@@ -1611,7 +1611,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_redirect_links", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_redirect_links", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "old_url", limit: 2048, null: false
     t.string "new_url", limit: 2048
     t.string "referer", limit: 2048, null: false
@@ -1628,7 +1628,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["old_url"], name: "idx_old_url", length: 100
   end
 
-  create_table "j33_schemas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_schemas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "extension_id", null: false
     t.string "version_id", limit: 20, null: false
     t.string "token", limit: 50
@@ -1638,10 +1638,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["extension_id"], name: "index_j33_schemas_on_extension_id"
   end
 
-  create_table "j33_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_sessions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.binary "session_id", limit: 192, null: false
-    t.integer "client_id", limit: 1, unsigned: true
-    t.integer "guest", limit: 1, default: 1, unsigned: true
+    t.boolean "client_id", unsigned: true
+    t.boolean "guest", default: true, unsigned: true
     t.integer "time", default: 0, null: false
     t.text "data", size: :long
     t.bigint "user_id", default: 0
@@ -1655,7 +1655,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "userid"
   end
 
-  create_table "j33_tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "parent_id", default: 0, null: false, unsigned: true
     t.integer "lft", default: 0, null: false
     t.integer "rgt", default: 0, null: false
@@ -1697,7 +1697,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["published", "access"], name: "tag_idx"
   end
 
-  create_table "j33_template_styles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_template_styles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "template", limit: 50, null: false
     t.integer "client_id", limit: 1, default: 0, null: false, unsigned: true
     t.string "home", limit: 7, default: "0", null: false
@@ -1713,7 +1713,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["template"], name: "idx_template"
   end
 
-  create_table "j33_ucm_bases", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_ucm_bases", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "ucm_id", null: false, unsigned: true
     t.integer "ucm_item_id", null: false
     t.integer "ucm_type_id", null: false
@@ -1727,7 +1727,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["ucm_type_id"], name: "idx_ucm_type_id"
   end
 
-  create_table "j33_ucm_contents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_ucm_contents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "core_content_id", null: false, unsigned: true
     t.string "core_type_alias", limit: 400, null: false, comment: "FK to the content types table"
     t.string "core_title", limit: 400, null: false
@@ -1780,7 +1780,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["core_type_id"], name: "idx_core_type_id"
   end
 
-  create_table "j33_ucm_histories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_ucm_histories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "version_id", null: false, unsigned: true
     t.integer "ucm_item_id", null: false, unsigned: true
     t.integer "ucm_type_id", null: false, unsigned: true
@@ -1799,7 +1799,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["version_id"], name: "idx_version_id", unique: true
   end
 
-  create_table "j33_update_sites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_update_sites", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "update_site_id", null: false
     t.string "name", limit: 100
     t.string "type", limit: 20
@@ -1813,7 +1813,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["update_site_id"], name: "index_j33_update_sites_on_update_site_id", unique: true
   end
 
-  create_table "j33_update_sites_extensions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_update_sites_extensions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "update_site_id", default: 0, null: false
     t.bigint "extension_id", default: 0, null: false
     t.string "token", limit: 50
@@ -1824,7 +1824,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["update_site_id"], name: "index_j33_update_sites_extensions_on_update_site_id"
   end
 
-  create_table "j33_updates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_updates", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "update_id", null: false
     t.bigint "update_site_id", default: 0
     t.bigint "extension_id", default: 0
@@ -1847,7 +1847,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["update_site_id"], name: "index_j33_updates_on_update_site_id"
   end
 
-  create_table "j33_user_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_user_keys", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "token", null: false
     t.string "series", limit: 191, null: false
@@ -1860,7 +1860,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "user_id"
   end
 
-  create_table "j33_user_notes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_user_notes", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", default: 0, null: false
     t.bigint "cat_id", default: 0, null: false
     t.string "subject", limit: 100, null: false
@@ -1882,7 +1882,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "idx_user_id"
   end
 
-  create_table "j33_user_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_user_profiles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "profile_key", limit: 100, null: false
     t.text "profile_value", null: false
@@ -1894,7 +1894,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "index_j33_user_profiles_on_user_id"
   end
 
-  create_table "j33_user_usergroup_maps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_user_usergroup_maps", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", default: 0, null: false, comment: "Foreign Key to jos_users.id"
     t.bigint "group_id", default: 0, null: false, comment: "Foreign Key to jos_usergroups.id"
     t.string "token", limit: 50
@@ -1905,7 +1905,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["user_id"], name: "index_j33_user_usergroup_maps_on_user_id"
   end
 
-  create_table "j33_usergroups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_usergroups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "parent_id", default: 0, null: false, comment: "Adjacency List Reference Id", unsigned: true
     t.integer "lft", default: 0, null: false, comment: "Nested set lft."
     t.integer "rgt", default: 0, null: false, comment: "Nested set rgt."
@@ -1919,12 +1919,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["title"], name: "idx_usergroup_title_lookup"
   end
 
-  create_table "j33_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "username", limit: 190, null: false
     t.string "email", limit: 100, null: false
     t.string "encrypted_password", limit: 100, null: false
     t.string "secret_key"
     t.integer "role", default: 0, null: false
+    t.datetime "registerDate", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -1935,14 +1936,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
     t.index ["username"], name: "idx_username", unique: true
   end
 
-  create_table "j33_utf8_conversions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_utf8_conversions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "converted", limit: 1, default: 0, null: false
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "j33_viewlevels", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "j33_viewlevels", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", limit: 100, null: false
     t.integer "ordering", default: 0, null: false
     t.string "rules", limit: 5120, null: false, comment: "JSON encoded access control."
