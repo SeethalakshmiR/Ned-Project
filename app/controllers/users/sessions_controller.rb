@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to new_user_session_path, notice: t('devise.sessions.forgot_username_sent')
     else
       flash.now[:alert] = "Invalid email or password."
-      render :forgot_username, notice: t('devise.failure.email_not_found')
+      render :forgot_username
     end
   end
   # GET /resource/sign_in
