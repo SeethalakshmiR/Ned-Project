@@ -3,8 +3,8 @@ class CreateJ33AkStats < ActiveRecord::Migration[7.0]
     create_table :j33_ak_stats do |t|
       t.string :description, null: false, limit: 255
       t.text :comment, limit: 4294967295
-      t.timestamp :backupstart, default: nil 
-      t.timestamp :backupend, default: nil  
+      t.timestamp :backupstart
+      t.timestamp :backupend
       t.string :status, null: false, default: 'run'
       t.string :origin, null: false, default: 'backend', limit: 30 
       t.string :type, null: false, default: 'full', limit: 30

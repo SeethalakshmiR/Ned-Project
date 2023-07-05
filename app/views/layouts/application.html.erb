@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>NedProject</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag "application" %>
+  <%#= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= tinymce %>
+  <script>
+      $(function() {
+      $("#title").keyup(function() {
+       var name = $("#title").val().toLowerCase();
+       $("#alias").val(name.replace(/-/g,' '));
+     });
+    });
+  </script>
 </head>
-<body>
+
+<body class="fixed-navbar">
+  <%= render 'shared/header' %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <%= yield %>
-  <%= link_to "Log Out", logout_path %>
 </body>
 </html>

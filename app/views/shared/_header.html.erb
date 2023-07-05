@@ -1,0 +1,20 @@
+<header class="header">
+  <%= image_tag '/assets/piota_logo.png' %>
+    <ul class="nav navbar-toolbar">
+      <%= link_to admin_dashboard_path(token: current_user.token), class: 'nav-link' do %>
+      <i class="fa fa-home" style="font-size:40px;color:black"></i>
+      <% end %>
+      <span><a href="#" class="nav-link">Themes List</a></span>
+      <span><%= link_to "Create Theme",create_theme_path %></span>
+      <span><a href="#" class="nav-link">Draft Themes List</a></span>
+      <span><a href="#" class="nav-link">Create Draft Themes</a></span>
+      <span><a href="#" class="nav-link">Apps List</a></span>
+      <span><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">More <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span></a>
+        <div role="menu" class="dropdown-menu animated zoomIn">
+          <a href="#" class="dropdown-item">Documentation</a>
+          <a href="#" class="dropdown-item">Expert Backend</a>
+          <a href="#" class="dropdown-item">Expert FrontEnd</a>
+          <a href="#" class="dropdown-item">Contact Support</a>
+        </div>
+    </ul>
+</header>
