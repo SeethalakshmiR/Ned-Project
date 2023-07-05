@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # login routes
   devise_scope :user do
+    get '', to: 'devise/sessions#new', as: :login
     get '/logout', to: 'devise/sessions#destroy', as: :logout
     get '/forgot_username', to: 'users/sessions#forgot_username', as: :forgot_username
     post '/forgot_username', to: 'users/sessions#send_username', as: :send_username
