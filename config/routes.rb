@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     post '/forgot_username', to: 'users/sessions#send_username', as: :send_username
   end  
   get '/customer', to: 'dashboard#index', as: :customer_dashboard
+
+  #show admin details routes
+  get '/admin_list/:token', to: 'dashboard#show_admin_details', as: :admin_user
+  get '/export_csv', to: 'dashboard#export_csv', as: :export_csv
 end
