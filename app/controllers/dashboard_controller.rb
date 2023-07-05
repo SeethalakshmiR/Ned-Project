@@ -15,8 +15,19 @@ class DashboardController < ApplicationController
     redirect_to admin_dashboard_path(token: current_user.token)
   end
 
+  def show_admin_details
+    @admin_details = Dashboard.csv_file
+  end
+
+  def export_csv
+    export_csv = Dashboard.csv_file
+    send_data export_csv, filename: "app_admin_users_#{Date.today}.csv", type: 'csv/text'
+  end
+
   private
+  
   def content_params
     params.require(:content).permit(:title, :alias, :introtext)
   end
 end
+
