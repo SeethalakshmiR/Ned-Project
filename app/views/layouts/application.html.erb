@@ -11,6 +11,15 @@
   <%#= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= tinymce %>
+  <script>
+      $(function() {
+      $("#title").keyup(function() {
+       var name = $("#title").val().toLowerCase();
+       $("#alias").val(name.replace(/-/g,' '));
+     });
+    });
+  </script>
 </head>
 
 <body class="fixed-navbar">

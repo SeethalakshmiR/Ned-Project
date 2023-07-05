@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     post '/forgot_username', to: 'users/sessions#send_username', as: :send_username
   end  
   get '/customer', to: 'dashboard#index', as: :customer_dashboard
-  get '/create', to: 'dashboard#create_theme', as: :create_theme
+  get '/theme', to: 'dashboard#create_theme', as: :create_theme
+  post '/create', to: 'dashboard#save_theme', as: :save_theme
 end

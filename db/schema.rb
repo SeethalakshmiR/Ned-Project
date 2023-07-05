@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_03_060707) do
+  create_table "contents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "j33_action_log_configs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "type_title", null: false
     t.string "type_alias", null: false
@@ -404,49 +409,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
   end
 
   create_table "j33_contents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "asset_id", default: 0, null: false, comment: "FK to the jos_assets table."
+    t.bigint "asset_id", default: 1, null: false, comment: "FK to the jos_assets table."
     t.string "title", null: false
     t.string "alias", limit: 400, null: false
     t.text "introtext", size: :long, null: false
-    t.text "fulltext", size: :long, null: false
-    t.integer "state", limit: 1, default: 0, null: false
-    t.bigint "cat_id", default: 0, null: false
-    t.datetime "created", null: false
-    t.integer "created_by", default: 0, null: false, unsigned: true
-    t.string "created_by_alias", null: false
-    t.datetime "modified", null: false
-    t.integer "modified_by", default: 0, null: false, unsigned: true
-    t.integer "checked_out", default: 0, null: false, unsigned: true
-    t.datetime "checked_out_time", null: false
-    t.datetime "publish_up", null: false
-    t.datetime "publish_down", null: false
-    t.text "images", size: :medium, null: false
-    t.text "urls", size: :medium, null: false
-    t.string "attribs", limit: 5120, null: false
-    t.integer "version", default: 1, null: false, unsigned: true
-    t.integer "ordering", default: 0, null: false
-    t.text "metakey", size: :medium, null: false
-    t.text "metadesc", size: :medium, null: false
-    t.integer "access", default: 0, null: false, unsigned: true
-    t.integer "hits", default: 0, null: false, unsigned: true
-    t.text "metadata", size: :medium, null: false
-    t.boolean "featured", default: false, null: false, comment: "Set if article is featured.", unsigned: true
-    t.string "language", limit: 7, null: false, comment: "The language code for the article."
-    t.string "xreference", limit: 50, null: false
-    t.string "note", null: false
+    t.bigint "cat_id", default: 1, null: false
+    t.bigint "created_by_id", default: 1, null: false
     t.string "token", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["access"], name: "idx_access"
     t.index ["alias"], name: "idx_alias", length: 191
     t.index ["asset_id"], name: "index_j33_contents_on_asset_id"
     t.index ["cat_id"], name: "idx_catid"
-    t.index ["checked_out"], name: "idx_checkout"
-    t.index ["created_by"], name: "idx_createdby"
-    t.index ["featured", "cat_id"], name: "idx_featured_catid"
-    t.index ["language"], name: "idx_language"
-    t.index ["state"], name: "idx_state"
-    t.index ["xreference"], name: "idx_xreference"
+    t.index ["created_by_id"], name: "idx_createdby"
   end
 
   create_table "j33_core_log_searches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -1968,6 +1943,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_080521) do
   add_foreign_key "j33_contentitem_tag_maps", "j33_tags", column: "tag_id"
   add_foreign_key "j33_contents", "j33_assets", column: "asset_id"
   add_foreign_key "j33_contents", "j33_categories", column: "cat_id"
+  add_foreign_key "j33_contents", "j33_users", column: "created_by_id"
   add_foreign_key "j33_corejoomla_messagequeues", "j33_messages", column: "message_id"
   add_foreign_key "j33_corejoomla_messages", "j33_assets", column: "asset_id"
   add_foreign_key "j33_corejoomla_rating_details", "j33_assets", column: "asset_id"

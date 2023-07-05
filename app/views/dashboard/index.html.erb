@@ -1,36 +1,18 @@
 <div class="ibox">
   <div class="ibox-body">
-    <!-- BEGIN THEME CONFIG PANEL-->
-    <div class="theme-config">
-      <div class="theme-config-toggle"><i class="fa fa-cog theme-config-show"></i><i class="ti-close theme-config-close"></i></div>
-      <div class="theme-config-box">
-          <div class="text-center font-18 m-b-20">SETTINGS</div>
-          <li>
-            <a class="dropdown-item" href="javascript:;">Dropdown link1</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:;">Dropdown link2</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:;">Dropdown link3</a>
-          </li>
-      </div>
-    </div>
-    <!-- END THEME CONFIG PANEL-->
+    <%= render 'shared/themesettings' %>
       <div class="page-content fade-in-up">
         <div class="ibox">
           <form class="form-horizontal">
           <br><h3>Home</h3></br>
-          <h5><%= link_to "Welcome",customer_dashboard_path %> created on the <%= @user_details.registerDate.strftime("%d of %B %Y") %> by anand</h5><br>
+          <h5><%= link_to "Welcome",customer_dashboard_path %> created on the <%= @user_detail.registerDate.to_s(:custom_datetime) %> by anand</h5><br>
           <h5>Details </h5>
           <p> Category: General Notes</p>
           <p>Welcome to the Piota internal system.</p>
-          <h5>You are logged in as <%= @user_details.username %> (qdx_demo)</h5>
-          <p>You have <%#= @app_details.count %> apps.<p>
+          <h5>You are logged in as <%= @user_detail.username %> (qdx_demo)</h5>
+          <p>You have <%= @app_details.count %> apps.<p>
           <h5>Your Apps</h5>
-             <%# @app_details.each do |details| %>
-          <p>- <%#= details.title %></p>
-             <%# end %>
+          <%= @app_details.pluck(:introtext).join("\n").html_safe %>
           </form>
         </div>
       </div>
