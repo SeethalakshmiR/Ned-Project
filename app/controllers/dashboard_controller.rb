@@ -1,9 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
   
-  def find_dashboard
-  end
-
   def index
     @user_detail = current_user
     @app_details = Content.where(created_by_id: current_user.id)

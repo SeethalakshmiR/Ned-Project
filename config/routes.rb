@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # root to: "dashboard#index"
-  get '/find_dashboard', to: 'dashboard#find_dashboard', as: :find_dashboard
+  # get '/find_dashboard', to: 'dashboard#find_dashboard', as: :find_dashboard
   devise_for :users, controllers: { sessions: 'users/sessions' }, path: '', path_names: { sign_in: 'login', sign_out: 'logout', password: 'reset_password', confirmation: 'verification', unlock: 'unblock', registration: '' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
