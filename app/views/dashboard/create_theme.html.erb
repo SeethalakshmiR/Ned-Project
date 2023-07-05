@@ -2,9 +2,9 @@
   <div class="ibox-body">
     <%= form_with(model: @app_details, url: save_theme_path, method: :post, local: true, class: "form-horizontal") do |form| %>
       <%= form.button '<i class="fa fa-check"></i> Save'.html_safe, class: 'btn btn-info' %>
-      <%= link_to '<i class="fa fa-close"></i> Cancel'.html_safe, customer_dashboard_path, class: 'btn btn-default' %>
-      <%= link_to '<i class=""></i> Versions'.html_safe, customer_dashboard_path, class: 'btn btn-default' %>
-      <%= link_to '<i class=""></i> Advanced'.html_safe, customer_dashboard_path, class: 'btn btn-default' %>
+      <%= link_to '<i class="fa fa-close"></i> Cancel'.html_safe, admin_dashboard_path(token: current_user.token), class: 'btn btn-default' %>
+      <%= link_to '<i class=""></i> Versions'.html_safe, admin_dashboard_path(token: current_user.token), class: 'btn btn-default' %>
+      <%= link_to '<i class=""></i> Advanced'.html_safe, admin_dashboard_path(token: current_user.token), class: 'btn btn-default' %>
         <div class="clf">
           <ul class="nav nav-tabs ">
             <li class="nav-item"><br>

@@ -1,9 +1,7 @@
 <header class="header">
-  <a class="link" href="index.html">
-    <%= image_tag '/assets/piota_logo.png' %>
-  </a>
+  <%= image_tag '/assets/piota_logo.png' %>
     <ul class="nav navbar-toolbar">
-      <%= link_to customer_dashboard_path, class: 'nav-link' do %>
+      <%= link_to admin_dashboard_path(token: current_user.token), class: 'nav-link' do %>
       <i class="fa fa-home" style="font-size:40px;color:black"></i>
       <% end %>
       <span><a href="#" class="nav-link">Themes List</a></span>

@@ -1,18 +1,18 @@
 <div class="ibox">
   <div class="ibox-body">
-    <%= render 'shared/themesettings' %>
+    <%= render 'shared/theme_settings' %>
       <div class="page-content fade-in-up">
         <div class="ibox">
           <form class="form-horizontal">
           <br><h3>Home</h3></br>
-          <h5><%= link_to "Welcome",customer_dashboard_path %> created on the <%= @user_detail.registerDate.to_s(:custom_datetime) %> by anand</h5><br>
+          <h5><%= link_to "Welcome",admin_dashboard_path(token: current_user.token) %> created on the <%= @user_detail.registerDate.to_s(:custom_datetime) %> by anand</h5><br>
           <h5>Details </h5>
           <p> Category: General Notes</p>
           <p>Welcome to the Piota internal system.</p>
           <h5>You are logged in as <%= @user_detail.username %> (qdx_demo)</h5>
           <p>You have <%= @app_details.count %> apps.<p>
           <h5>Your Apps</h5>
-          <%= @app_details.pluck(:introtext).join("\n").html_safe %>
+          <%= @app_details.pluck(:introtext).join.html_safe %>
           </form>
         </div>
       </div>
