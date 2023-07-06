@@ -1,11 +1,9 @@
 <header class="header">
   <%= image_tag '/assets/piota_logo.png' %>
     <ul class="nav navbar-toolbar">
-      <%= link_to admin_dashboard_path(token: current_user.token), class: 'nav-link' do %>
-      <i class="fa fa-home" style="font-size:40px;color:black"></i>
-      <% end %>
+      <%= link_to '<i class="fa fa-home" style="font-size:40px;color:black"></i>'.html_safe, admin_dashboard_path(token: current_user.token), class: 'nav-link' %>
       <span><a href="#" class="nav-link">Themes List</a></span>
-      <span><%= link_to "Create Theme",create_theme_path %></span>
+      <span><%= link_to "Create Theme",create_theme_path(token: current_user.token) %></span>
       <span><a href="#" class="nav-link">Draft Themes List</a></span>
       <span><a href="#" class="nav-link">Create Draft Themes</a></span>
       <span><a href="#" class="nav-link">Apps List</a></span>

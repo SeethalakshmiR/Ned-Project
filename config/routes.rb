@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   # login routes
   devise_scope :user do
-    get '', to: 'devise/sessions#new', as: :login
     get '/logout', to: 'devise/sessions#destroy', as: :logout
     get '/forgot_username', to: 'users/sessions#forgot_username', as: :forgot_username
     post '/forgot_username', to: 'users/sessions#send_username', as: :send_username
@@ -11,7 +10,7 @@ Rails.application.routes.draw do
 
   # create theme routes 
   get '/admin_dashboard/:token', to: 'dashboard#index', as: :admin_dashboard
-  get '/create_theme', to: 'dashboard#create_theme', as: :create_theme
+  get '/create_theme/:token', to: 'dashboard#create_theme', as: :create_theme
   post '/save_theme', to: 'dashboard#save_theme', as: :save_theme
 
   #show admin details routes
