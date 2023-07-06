@@ -16,11 +16,11 @@ class DashboardController < ApplicationController
   end
 
   def show_admin_details
-    @admin_details = Dashboard.csv_file
+    @admin_details = Dashboard.get_admin_details
   end
 
   def export_csv
-    export_csv = Dashboard.csv_file
+    export_csv = Dashboard.get_admin_details
     send_data export_csv, filename: "app_admin_users_#{Date.today}.csv", type: 'csv/text'
   end
 
