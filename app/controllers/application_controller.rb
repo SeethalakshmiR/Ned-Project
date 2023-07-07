@@ -12,11 +12,9 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    case current_user.role
-    when 'admin'
-      root_path 
-    else
-      customer_dashboard_path
+    if current_user.admin?
+      admin_dashboard_path(token: current_user.token)
+    elsif current_user.customer?
     end
   end
 
