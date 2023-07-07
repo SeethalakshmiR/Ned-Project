@@ -1,9 +1,7 @@
 class User < ApplicationRecord
-  before_create :generate_token
+  after_create :generate_token
   self.table_name = 'j33_users'
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
-        
+  devise :database_authenticatable,:recoverable, :rememberable, :validatable
   enum role:  [:admin, :customer] 
 
   protected
