@@ -5,19 +5,20 @@
     <a href><h5 class="text-primary">Admin Users </a><small style="color: black">Created on <%= current_user.registerDate.to_s(:custom_datetime) %> by Andy</small></h5><br>
     <h6 class= "font-light">Details<br><br> &nbsp;Category: Uncategorised<br><br>This is a list of all admin users in the backend</h6>     
     <%= link_to '<i class="fa fa-download" style="font-size:18px"></i> Export as CSV'.html_safe, export_csv_path, class: 'btn btn-default pull-right' %><br><br> 
-  <div>
-    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <%= @admin_details.headers.map { |header| "<th>#{header.capitalize}</th>" }.join.html_safe %>
-        </tr>
-      </thead>
-      <tbody>
-        <%= @admin_details.map { |row| "<tr>#{row.map { |_, value| "<td>#{value}</td>" }.join}</tr>" }.join.html_safe %>
-      </tbody>
-    </table>
+    <div>
+      <table class="table table-striped table-bordered table-hover" id="admin_details-table" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <%= @admin_details.headers.map { |header| "<th>#{header.capitalize}</th>" }.join.html_safe %>
+          </tr>
+        </thead>
+        <tbody>
+          <%= @admin_details.map { |row| "<tr>#{row.map { |_, value| "<td>#{value}</td>" }.join}</tr>" }.join.html_safe %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <script>
-  $("#example-table").DataTable();
+  $("#admin_details-table").DataTable();
 </script>
